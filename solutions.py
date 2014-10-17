@@ -126,31 +126,49 @@ def highestFactor(n):
 
 print highestFactor(600851475143)
 ################################################################################
-# 004 Q
+# 004 Q A palindromic number reads the same both ways. The largest palindrome
+# made from the product of two 2-digit numbers is 9009 = 91 × 99. Find the
+# largest palindrome made from the product of two 3-digit numbers.
 
-# func004(i,c,d)
-# i: (num) i =
+# func004(i,c,d) takes an number as a length, and finds the largest palindromic
+# number the is the result of the product of two numbers of length i
+# i: (num) i = length of numbers to be multiplied
 # i: (num) c = if feedback is printed to the console (not for debugging)
 #         (0 = none, 1 = basic feedback)
 # i: (num) d = if debugging information is printed to the console
 #         (0 = debug off, 1 = debug on)
-# o: (str) prints the final answer
-# r: (num) returns the final answer
+# o: (str) prints the largest palindromic product of two num of length i
+# r: (num) returns the largest palindromic product of two num of length i
 def func004(i,c,d):
     # Make sure the input value is valid
-    if i < 0:
+    if i < 1:
         if c > 0: # If logging to console is turned on
-            print str(i) + " is negative."
+            print str(i) + " is non-positive. Please try another length."
         if d > 0: # If printing debugging information is turned on
-            print "DEBUG: Inputing negative numbers may break this function."
+            print "DEBUG: Inputing non-positive numbers may break this function"
 
-    finalAnswer004 = 0 # Initialize the final answer
-
+    tempAnswer, tempA, tempB = 0, 0, 0 # Initialize temp value holders
+    a = (10**i) - 1 # Initialize first test number with highest value
+    while a >= 10**(i-1):
+        b = (10**i) - 1 # Reset second test number with each pass
+        while b >= 10**(i-1):
+            print str(a) + " * " + str(b) + " = " + str(a * b)
+            print "Reversed: " + str(a * b)[::-1]
+            if str(a * b) == str(a * b)[::-1]:
+                if int(a * b) > tempAnswer:
+                    tempA = a
+                    tempB = b
+                    tempAnswer = (a * b)
+            b -= 1
+        a -= 1
+    print str(a) + "*" + str(b) + " is the palindrome " + str(a * b)
+    finalAnswer004 = (a * b)
+    return finalAnswer004
 
     print "The final answer is " + str(finalAnswer004) + "."
     return finalAnswer004
 
-func004(0,1,1)
+func004(3,1,1)
 ################################################################################
 # 005 Q
 
